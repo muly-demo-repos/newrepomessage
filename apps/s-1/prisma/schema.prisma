@@ -25,4 +25,14 @@ model Customer {
   updatedAt DateTime @updatedAt
   name      String?
   lastName  String?
+  orders    Order[]
+}
+
+model Order {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  description String?
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  customerId  String?
 }

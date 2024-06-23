@@ -11,52 +11,47 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  MaxLength,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
-import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
+import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 
 @InputType()
-class CustomerUpdateInput {
+class OrderWhereInput {
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringFilter,
   })
-  @IsString()
-  @MaxLength(1000)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  name?: string | null;
+  id?: StringFilter;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringNullableFilter,
   })
-  @IsString()
-  @MaxLength(1000)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  lastName?: string | null;
+  description?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: () => OrderUpdateManyWithoutCustomersInput,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutCustomersInput)
+  @Type(() => CustomerWhereUniqueInput)
   @IsOptional()
-  @Field(() => OrderUpdateManyWithoutCustomersInput, {
+  @Field(() => CustomerWhereUniqueInput, {
     nullable: true,
   })
-  orders?: OrderUpdateManyWithoutCustomersInput;
+  customer?: CustomerWhereUniqueInput;
 }
 
-export { CustomerUpdateInput as CustomerUpdateInput };
+export { OrderWhereInput as OrderWhereInput };
