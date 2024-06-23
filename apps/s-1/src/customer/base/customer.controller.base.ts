@@ -41,6 +41,7 @@ export class CustomerControllerBase {
         updatedAt: true,
         name: true,
         lastName: true,
+        numero: true,
       },
     });
   }
@@ -58,6 +59,7 @@ export class CustomerControllerBase {
         updatedAt: true,
         name: true,
         lastName: true,
+        numero: true,
       },
     });
   }
@@ -76,6 +78,7 @@ export class CustomerControllerBase {
         updatedAt: true,
         name: true,
         lastName: true,
+        numero: true,
       },
     });
     if (result === null) {
@@ -103,6 +106,7 @@ export class CustomerControllerBase {
           updatedAt: true,
           name: true,
           lastName: true,
+          numero: true,
         },
       });
     } catch (error) {
@@ -130,6 +134,7 @@ export class CustomerControllerBase {
           updatedAt: true,
           name: true,
           lastName: true,
+          numero: true,
         },
       });
     } catch (error) {

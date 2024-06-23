@@ -7,6 +7,7 @@ import {
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  NumberInput,
 } from "react-admin";
 
 import { OrderTitle } from "../order/OrderTitle";
@@ -25,6 +26,7 @@ export const CustomerEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={OrderTitle} />
         </ReferenceArrayInput>
+        <NumberInput label="numero" source="numero" />
       </SimpleForm>
     </Edit>
   );

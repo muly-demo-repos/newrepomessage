@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { DecimalNullableFilter } from "../../util/DecimalNullableFilter";
 
 @InputType()
 class CustomerWhereInput {
@@ -63,6 +64,17 @@ class CustomerWhereInput {
     nullable: true,
   })
   orders?: OrderListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DecimalNullableFilter,
+  })
+  @Type(() => DecimalNullableFilter)
+  @IsOptional()
+  @Field(() => DecimalNullableFilter, {
+    nullable: true,
+  })
+  numero?: DecimalNullableFilter;
 }
 
 export { CustomerWhereInput as CustomerWhereInput };

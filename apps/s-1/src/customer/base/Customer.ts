@@ -9,17 +9,23 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
+import { ObjectType, Field, Float } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+
 import {
   IsString,
   IsDate,
   MaxLength,
   IsOptional,
   ValidateNested,
+  IsNumber,
+  Min,
+  Max,
 } from "class-validator";
+
 import { Type } from "class-transformer";
 import { Order } from "../../order/base/Order";
+import { Decimal } from "decimal.js";
 
 @ObjectType()
 class Customer {
@@ -79,6 +85,19 @@ class Customer {
   @Type(() => Order)
   @IsOptional()
   orders?: Array<Order>;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(5)
+  @Max(100)
+  @IsOptional()
+  @Field(() => Float, {
+    nullable: true,
+  })
+  numero!: Decimal | null;
 }
 
 export { Customer as Customer };
