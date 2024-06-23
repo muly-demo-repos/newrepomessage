@@ -9,16 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType, Field, Float } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
   MaxLength,
   IsOptional,
   ValidateNested,
+  IsNumber,
+  Min,
+  Max,
 } from "class-validator";
 import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
 import { Type } from "class-transformer";
+import { Decimal } from "decimal.js";
 
 @InputType()
 class CustomerUpdateInput {
@@ -57,6 +61,19 @@ class CustomerUpdateInput {
     nullable: true,
   })
   orders?: OrderUpdateManyWithoutCustomersInput;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(5)
+  @Max(100)
+  @IsOptional()
+  @Field(() => Float, {
+    nullable: true,
+  })
+  numero?: Decimal | null;
 }
 
 export { CustomerUpdateInput as CustomerUpdateInput };

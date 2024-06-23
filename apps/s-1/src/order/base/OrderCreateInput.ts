@@ -27,7 +27,7 @@ class OrderCreateInput {
     type: String,
   })
   @IsString()
-  @MaxLength(1000)
+  @MaxLength(10)
   @IsOptional()
   @Field(() => String, {
     nullable: true,

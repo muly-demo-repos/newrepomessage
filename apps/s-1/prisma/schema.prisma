@@ -26,6 +26,7 @@ model Customer {
   name      String?
   lastName  String?
   orders    Order[]
+  numero    Decimal?
 }
 
 model Order {
