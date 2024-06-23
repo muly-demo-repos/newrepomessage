@@ -18,3 +18,11 @@ model User {
   password  String
   roles     Json
 }
+
+model Customer {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String?
+  lastName  String?
+}
