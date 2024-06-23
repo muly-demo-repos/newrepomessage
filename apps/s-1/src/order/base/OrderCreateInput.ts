@@ -17,11 +17,11 @@ import {
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 
 @InputType()
-class CustomerUpdateInput {
+class OrderCreateInput {
   @ApiProperty({
     required: false,
     type: String,
@@ -32,31 +32,19 @@ class CustomerUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  name?: string | null;
+  description?: string | null;
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  lastName?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderUpdateManyWithoutCustomersInput,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutCustomersInput)
+  @Type(() => CustomerWhereUniqueInput)
   @IsOptional()
-  @Field(() => OrderUpdateManyWithoutCustomersInput, {
+  @Field(() => CustomerWhereUniqueInput, {
     nullable: true,
   })
-  orders?: OrderUpdateManyWithoutCustomersInput;
+  customer?: CustomerWhereUniqueInput | null;
 }
 
-export { CustomerUpdateInput as CustomerUpdateInput };
+export { OrderCreateInput as OrderCreateInput };

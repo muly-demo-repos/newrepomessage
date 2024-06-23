@@ -9,19 +9,44 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
+  IsDate,
   MaxLength,
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
 import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 
-@InputType()
-class CustomerUpdateInput {
+@ObjectType()
+class Order {
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  id!: string;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  createdAt!: Date;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  updatedAt!: Date;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -32,31 +57,16 @@ class CustomerUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  name?: string | null;
+  description!: string | null;
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  lastName?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderUpdateManyWithoutCustomersInput,
+    type: () => Customer,
   })
   @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutCustomersInput)
+  @Type(() => Customer)
   @IsOptional()
-  @Field(() => OrderUpdateManyWithoutCustomersInput, {
-    nullable: true,
-  })
-  orders?: OrderUpdateManyWithoutCustomersInput;
+  customer?: Customer | null;
 }
 
-export { CustomerUpdateInput as CustomerUpdateInput };
+export { Order as Order };

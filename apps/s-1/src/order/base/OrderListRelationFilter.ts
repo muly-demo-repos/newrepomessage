@@ -11,52 +11,46 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  MaxLength,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
-import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
+import { OrderWhereInput } from "./OrderWhereInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 
 @InputType()
-class CustomerUpdateInput {
+class OrderListRelationFilter {
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  name?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  lastName?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderUpdateManyWithoutCustomersInput,
+    type: () => OrderWhereInput,
   })
   @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutCustomersInput)
+  @Type(() => OrderWhereInput)
   @IsOptional()
-  @Field(() => OrderUpdateManyWithoutCustomersInput, {
+  @Field(() => OrderWhereInput, {
     nullable: true,
   })
-  orders?: OrderUpdateManyWithoutCustomersInput;
-}
+  every?: OrderWhereInput;
 
-export { CustomerUpdateInput as CustomerUpdateInput };
+  @ApiProperty({
+    required: false,
+    type: () => OrderWhereInput,
+  })
+  @ValidateNested()
+  @Type(() => OrderWhereInput)
+  @IsOptional()
+  @Field(() => OrderWhereInput, {
+    nullable: true,
+  })
+  some?: OrderWhereInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => OrderWhereInput,
+  })
+  @ValidateNested()
+  @Type(() => OrderWhereInput)
+  @IsOptional()
+  @Field(() => OrderWhereInput, {
+    nullable: true,
+  })
+  none?: OrderWhereInput;
+}
+export { OrderListRelationFilter as OrderListRelationFilter };
